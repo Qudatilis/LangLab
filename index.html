@@ -89,7 +89,9 @@
         <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
         <button onclick="search()">Search</button>
         <button onclick="paste('P.S.')">P.S.</button>
-        <button onclick="paste('Examples')">Examples</button>
+        <button onclick="paste('Example')">Example</button>
+        <button onclick="copyBoxText('P.S.')">P.S. Copy</button>
+        <button onclick="copyBoxText('Example')">Example Copy</button>
         <div id="searchResults"></div>
     </div>
 
@@ -131,6 +133,8 @@
                         </div>
                     `;
                 }
+                
+                clearBoxes(); // P.S. ve Example kutularını temizle
             }
         }
 
@@ -158,27 +162,29 @@
             });
         });
 
-        document.getElementById('Examples').addEventListener('click', function() {
+        document.getElementById('Example').addEventListener('click', function() {
             var boxText = this.innerText.trim();
             navigator.clipboard.writeText(boxText).catch(function(err) {
                 console.error('Metin kopyalanamadı: ', err);
                 alert('Metin kopyalanamadı.');
             });
         });
-    </script>
 
-    <div class="box" id="P.S." onclick="copyText('P.S.')"></div>
-    <div class="box" id="Examples" onclick="copyText('Examples')"></div>
+        function clearBoxes() {
+            document.getElementById('P.S.').innerHTML = ''; // P.S. kutusunu temizle
+            document.getElementById('Example').innerHTML = ''; // Example kutusunu temizle
+        }
 
-    <script>
-        function copyText(boxId) {
-            var box = document.getElementById(boxId);
-            var boxText = box.innerText.trim();
+        function copyBoxText(boxId) {
+            var boxText = document.getElementById(boxId).innerText.trim();
             navigator.clipboard.writeText(boxText).catch(function(err) {
                 console.error('Metin kopyalanamadı: ', err);
                 alert('Metin kopyalanamadı.');
             });
         }
     </script>
+
+    <div class="box" id="P.S."></div>
+    <div class="box" id="Example"></div>
 </body>
 </html>
