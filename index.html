@@ -8,11 +8,11 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #171717; /* Sitenin arka plan rengi */
+            background-color: #808080; /* Sitenin arka plan rengi */
         }
 
         #content {
-            padding: 20px;
+            padding: 0px;
             position: relative;
             z-index: 1;
         }
@@ -29,21 +29,22 @@
             height: 700px;
         }
 
-        .cambridge-iframe-container {
+        /* Cambridge iframe için arka plan rengi */
+        .cambridge-iframe {
             background-color: #ffffff; /* Cambridge iframe'inin arka plan rengi */
-            padding: 10px;
-            width: 700px;
-            margin-bottom: 20px;
+            padding: 0px;
+            margin-bottom: 0px;
         }
 
         #turengContainer iframe {
             width: 800px;
             height: 700px;
+            padding: 0px;
         }
 
         /* Tureng için geniş görünüm */
         #turengContainer {
-            margin-bottom: 20px;
+            margin-bottom: 0px;
         }
 
         /* Cambridge ve Collins için yan yana düzen */
@@ -57,7 +58,7 @@
         #cambridgeCollinsContainer .site-container {
             width: 50%;
             box-sizing: border-box;
-            padding: 0 10px;
+            padding: 0 0px;
         }
 
         @media only screen and (max-width: 700px) {
@@ -67,8 +68,17 @@
 
             #cambridgeCollinsContainer .site-container {
                 width: 100%;
-                margin-bottom: 20px;
+                margin-bottom: 0px;
             }
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 10px;
+            float: left;
         }
     </style>
 </head>
@@ -77,6 +87,8 @@
         <h1>Language Lab</h1>
         <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
         <button onclick="search()">Search</button>
+        <button onclick="paste('KA')">KA'ya Ekle</button>
+        <button onclick="paste('TA')">TA'ya Ekle</button>
         <div id="searchResults"></div>
     </div>
 
@@ -101,7 +113,7 @@
                     document.getElementById('searchResults').innerHTML += `
                         <div id="cambridgeCollinsContainer" class="site-container">
                             <div class="site-container">
-                                <iframe src="${cambridgeUrl}"></iframe>
+                                <iframe src="${cambridgeUrl}" class="cambridge-iframe"></iframe>
                             </div>
                             <div class="site-container">
                                 <iframe src="${collinsUrl}"></iframe>
@@ -120,6 +132,24 @@
                 }
             }
         }
+
+        function paste(boxId) {
+            var box = document.getElementById(boxId); // İlgili kutuyu seç
+
+            navigator.clipboard.readText().then(function(clipboardText) {
+                if (clipboardText.trim() !== '') {
+                    box.innerHTML += "<div>" + clipboardText + "</div>"; // Kutuya panodaki metni ekle
+                } else {
+                    alert('Panoda metin bulunamadı.');
+                }
+            }).catch(function(err) {
+                console.error('Panodan metin okunamadı: ', err);
+                alert('Panodan metin okunamadı.');
+            });
+        }
     </script>
+
+    <div class="box" id="KA">KA</div>
+    <div class="box" id="TA">TA</div>
 </body>
 </html>
