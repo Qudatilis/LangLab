@@ -9,8 +9,8 @@
             margin-bottom: 20px;
         }
         iframe {
-            width: 150%;
-            height: 800px;
+            width: 100%;
+            height: 500px;
             border: 1px solid #ccc;
         }
 
@@ -23,52 +23,50 @@
                 display: block;
             }
         }
-
-        /* Sadece Tureng için mobil görünüm kaldırma */
-        @media only screen and (max-width: 600px) {
-            #turengFrame {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
-    <h1>Language Lab</h1>
-    <input type="text" id="searchInput" placeholder="Enter a word or phrase">
+    <h1>Language Lab2</h1>
+    <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
 
     <script>
+        function searchOnEnter(event) {
+            if (event.key === 'Enter') {
+                search();
+            }
+        }
+
         function search() {
             var phrase = document.getElementById('searchInput').value.trim();
             if (phrase !== '') {
                 var cambridgeUrl = 'https://dictionary.cambridge.org/dictionary/english/' + encodeURIComponent(phrase.replace(/\s/g, '-'));
                 var collinsUrl = 'https://www.collinsdictionary.com/dictionary/english/' + encodeURIComponent(phrase.replace(/\s/g, '-'));
-
                 var turengUrl = 'https://tureng.com/tr/turkce-ingilizce/' + encodeURIComponent(phrase.replace(/\s/g, '%20'));
 
                 document.getElementById('searchResults').innerHTML = ''; // Temizleme
 
                 document.getElementById('searchResults').innerHTML += `
                     <div class="site-container">
-                        <h2>Cambridge Dictionary</h2>
                         <iframe src="${cambridgeUrl}"></iframe>
                     </div>
                 `;
 
                 document.getElementById('searchResults').innerHTML += `
                     <div class="site-container">
-                        <h2>Collins Dictionary</h2>
                         <iframe src="${collinsUrl}"></iframe>
                     </div>
                 `;
 
-                document.getElementById('searchResults').innerHTML += `
-                    <div class="site-container">
-                        <h2>Tureng</h2>
-                        <iframe id="turengFrame" src="${turengUrl}"></iframe>
-                    </div>
-                `;
+                // Sadece Tureng için mobil görünüm kaldırıldı
+                if (turengUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div class="site-container">
+                            <iframe src="${turengUrl}" style="height: 800px;"></iframe>
+                        </div>
+                    `;
+                }
             }
         }
     </script>
