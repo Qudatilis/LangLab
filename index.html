@@ -133,6 +133,10 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchInput').focus();
+        });
+
         function searchOnEnter(event) {
             if (event.key === 'Enter') {
                 search();
@@ -212,12 +216,6 @@
             });
         }
 
-    // Sayfa yüklenmesiyle birlikte arama kutusuna odaklan
-    window.onload = function() {
-        setTimeout(function() {
-            document.getElementById("searchInput").focus(); // Arama kutusuna odaklan
-        }, 100); // Gecikme ekleyerek odaklanma işlemini sağlar
-    };
     </script>
 
 <div class="box" id="P.S."></div>
