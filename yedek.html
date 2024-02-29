@@ -9,8 +9,8 @@
             margin-bottom: 20px;
         }
         iframe {
-            width: 150%;
-            height: 800px;
+            width: 100%;
+            height: 500px;
             border: 1px solid #ccc;
         }
 
@@ -27,11 +27,17 @@
 </head>
 <body>
     <h1>Language Lab</h1>
-    <input type="text" id="searchInput" placeholder="Enter a word or phrase">
+    <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
 
     <script>
+        function searchOnEnter(event) {
+            if (event.key === 'Enter') {
+                search();
+            }
+        }
+
         function search() {
             var phrase = document.getElementById('searchInput').value.trim();
             if (phrase !== '') {
@@ -41,26 +47,32 @@
 
                 document.getElementById('searchResults').innerHTML = ''; // Temizleme
 
-                document.getElementById('searchResults').innerHTML += `
-                    <div class="site-container">
-                        <h2>Cambridge Dictionary</h2>
-                        <iframe src="${cambridgeUrl}"></iframe>
-                    </div>
-                `;
+                // Tureng
+                if (turengUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div class="site-container">
+                            <iframe src="${turengUrl}" style="height: 800px;"></iframe>
+                        </div>
+                    `;
+                }
 
-                document.getElementById('searchResults').innerHTML += `
-                    <div class="site-container">
-                        <h2>Collins Dictionary</h2>
-                        <iframe src="${collinsUrl}"></iframe>
-                    </div>
-                `;
+                // Cambridge
+                if (cambridgeUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div class="site-container">
+                            <iframe src="${cambridgeUrl}"></iframe>
+                        </div>
+                    `;
+                }
 
-                document.getElementById('searchResults').innerHTML += `
-                    <div class="site-container">
-                        <h2>Tureng</h2>
-                        <iframe src="${turengUrl}"></iframe>
-                    </div>
-                `;
+                // Collins
+                if (collinsUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div class="site-container">
+                            <iframe src="${collinsUrl}"></iframe>
+                        </div>
+                    `;
+                }
             }
         }
     </script>
