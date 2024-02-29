@@ -81,17 +81,46 @@
             float: left;
             cursor: pointer; /* Mouse imlecini el işareti yap */
         }
+
+        /* Buton renkleri */
+        .search-button {
+            background-color: #bbbbbb; /* Yeşil */
+            color: white;
+            border: none;
+            padding: 5px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .paste-button {
+            background-color: #863e28; /* Mavi */
+            color: white;
+            border: none;
+            padding: 5px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .copy-button {
+            background-color: #396138; /* Mavi */
+            color: white;
+            border: none;
+            padding: 5px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div id="content">
         <h1>Language Lab</h1>
         <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
-        <button onclick="search()">Search</button>
-        <button onclick="paste('P.S.')">P.S.</button>
-        <button onclick="paste('Example')">Example</button>
-        <button onclick="copyBoxText('P.S.')">P.S. Copy</button>
-        <button onclick="copyBoxText('Example')">Example Copy</button>
+<button class="search-button" onclick="search()">Search</button>
+<button class="paste-button" onclick="paste('P.S.')">P.S. Paste</button>
+<button class="paste-button" onclick="paste('Ex.')">Ex. Paste</button>
+<button class="copy-button" onclick="copyBoxText('P.S.')">P.S. Copy</button>
+<button class="copy-button" onclick="copyBoxText('Ex.')">Ex. Copy</button>
+
         <div id="searchResults"></div>
     </div>
 
@@ -134,7 +163,7 @@
                     `;
                 }
                 
-                clearBoxes(); // P.S. ve Example kutularını temizle
+                clearBoxes(); // P.S. ve Ex. kutularını temizle
             }
         }
 
@@ -143,7 +172,7 @@
 
             navigator.clipboard.readText().then(function(clipboardText) {
                 if (clipboardText.trim() !== '') {
-                    box.innerHTML += "<div>" + clipboardText.trim().split('\n').join('</div><div>') + "</div><br>"; // Kutuya panodaki metni ekle
+                    box.innerHTML += "<div>" + clipboardText.trim().split('\n').join('</div><div>') + "</div>"; // Kutuya panodaki metni ekle
                 } else {
                     alert('Panoda metin bulunamadı.');
                 }
@@ -162,17 +191,9 @@
             });
         });
 
-        document.getElementById('Example').addEventListener('click', function() {
-            var boxText = this.innerText.trim();
-            navigator.clipboard.writeText(boxText).catch(function(err) {
-                console.error('Metin kopyalanamadı: ', err);
-                alert('Metin kopyalanamadı.');
-            });
-        });
-
         function clearBoxes() {
             document.getElementById('P.S.').innerHTML = ''; // P.S. kutusunu temizle
-            document.getElementById('Example').innerHTML = ''; // Example kutusunu temizle
+            document.getElementById('Ex.').innerHTML = ''; // Ex. kutusunu temizle
         }
 
         function copyBoxText(boxId) {
@@ -184,7 +205,7 @@
         }
     </script>
 
-    <div class="box" id="P.S."></div>
-    <div class="box" id="Example"></div>
+<div class="box" id="P.S."></div>
+<div class="box" id="Ex."></div>
 </body>
 </html>
