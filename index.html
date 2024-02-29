@@ -8,7 +8,11 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #171717; /* Arka plan rengi */
+        }
+
+        #content {
+            background-color: #171717; /* İçeriklerin arka plan rengi */
+            padding: 20px;
         }
 
         .site-container {
@@ -58,10 +62,12 @@
     </style>
 </head>
 <body>
-    <h1>Language Lab</h1>
-    <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
-    <button onclick="search()">Search</button>
-    <div id="searchResults"></div>
+    <div id="content">
+        <h1>Language Lab</h1>
+        <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
+        <button onclick="search()">Search</button>
+        <div id="searchResults"></div>
+    </div>
 
     <script>
         function searchOnEnter(event) {
