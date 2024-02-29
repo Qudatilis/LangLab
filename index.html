@@ -79,6 +79,7 @@
             margin: 20px;
             padding: 10px;
             float: left;
+            cursor: pointer; /* Mouse imlecini el işareti yap */
         }
     </style>
 </head>
@@ -87,8 +88,8 @@
         <h1>Language Lab</h1>
         <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
         <button onclick="search()">Search</button>
-        <button onclick="paste('KA')">KA'ya Ekle</button>
-        <button onclick="paste('TA')">TA'ya Ekle</button>
+        <button onclick="paste('P.S.')">P.S.</button>
+        <button onclick="paste('Examples')">Examples</button>
         <div id="searchResults"></div>
     </div>
 
@@ -134,23 +135,50 @@
         }
 
         function paste(boxId) {
-    var box = document.getElementById(boxId); // İlgili kutuyu seç
+            var box = document.getElementById(boxId); // İlgili kutuyu seç
 
-    navigator.clipboard.readText().then(function(clipboardText) {
-        if (clipboardText.trim() !== '') {
-            box.innerHTML += "<div>" + clipboardText.trim().split('\n').join('</div><div>') + "</div><br>"; // Kutuya panodaki metni ekle
-        } else {
-            alert('Panoda metin bulunamadı.');
+            navigator.clipboard.readText().then(function(clipboardText) {
+                if (clipboardText.trim() !== '') {
+                    box.innerHTML += "<div>" + clipboardText.trim().split('\n').join('</div><div>') + "</div><br>"; // Kutuya panodaki metni ekle
+                } else {
+                    alert('Panoda metin bulunamadı.');
+                }
+            }).catch(function(err) {
+                console.error('Panodan metin okunamadı: ', err);
+                alert('Panodan metin okunamadı.');
+            });
         }
-    }).catch(function(err) {
-        console.error('Panodan metin okunamadı: ', err);
-        alert('Panodan metin okunamadı.');
-    });
-}
 
+        // Box'a tıklandığında metni otomatik olarak kopyala
+        document.getElementById('P.S.').addEventListener('click', function() {
+            var boxText = this.innerText.trim();
+            navigator.clipboard.writeText(boxText).catch(function(err) {
+                console.error('Metin kopyalanamadı: ', err);
+                alert('Metin kopyalanamadı.');
+            });
+        });
+
+        document.getElementById('Examples').addEventListener('click', function() {
+            var boxText = this.innerText.trim();
+            navigator.clipboard.writeText(boxText).catch(function(err) {
+                console.error('Metin kopyalanamadı: ', err);
+                alert('Metin kopyalanamadı.');
+            });
+        });
     </script>
 
-    <div class="box" id="KA">KA</div>
-    <div class="box" id="TA">TA</div>
+    <div class="box" id="P.S." onclick="copyText('P.S.')"></div>
+    <div class="box" id="Examples" onclick="copyText('Examples')"></div>
+
+    <script>
+        function copyText(boxId) {
+            var box = document.getElementById(boxId);
+            var boxText = box.innerText.trim();
+            navigator.clipboard.writeText(boxText).catch(function(err) {
+                console.error('Metin kopyalanamadı: ', err);
+                alert('Metin kopyalanamadı.');
+            });
+        }
+    </script>
 </body>
 </html>
