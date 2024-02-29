@@ -18,3 +18,11 @@ document.addEventListener('contextmenu', function(event) {
     sendSelectedTextToBox(selectedText, boxId);
   }
 });
+
+// Web sitesi JavaScript kodu
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  // Eklentiden gelen mesajı işleyin ve KA veya KE kutucuğuna metni ekleyin
+  // Örneğin:
+  document.getElementById("KA").value += message.text + "\n"; // KA kutucuğuna eklemek için
+  document.getElementById("KE").value += message.text + "\n"; // KE kutucuğuna eklemek için
+});
