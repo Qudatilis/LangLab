@@ -18,7 +18,6 @@
 
         iframe {
             border: 1px solid #ccc;
-            max-width: 100%;
         }
 
         /* Tureng için geniş görünüm */
@@ -82,10 +81,10 @@
                     document.getElementById('searchResults').innerHTML += `
                         <div id="cambridgeCollinsContainer" class="site-container">
                             <div class="site-container">
-                                <iframe src="${cambridgeUrl}" style="height: 700px;"></iframe>
+                                <iframe src="${cambridgeUrl}" style="border: none; width: 100%;"></iframe>
                             </div>
                             <div class="site-container">
-                                <iframe src="${collinsUrl}" style="height: 700px;"></iframe>
+                                <iframe src="${collinsUrl}" style="border: none; width: 100%;"></iframe>
                             </div>
                         </div>
                     `;
@@ -95,7 +94,7 @@
                 if (turengUrl) {
                     document.getElementById('searchResults').innerHTML += `
                         <div id="turengContainer" class="site-container">
-                            <iframe src="${turengUrl}"></iframe>
+                            <iframe src="${turengUrl}" style="border: none; width: 100%;"></iframe>
                         </div>
                     `;
                 }
