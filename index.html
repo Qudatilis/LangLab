@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-    <h1>Language Lab3</h1>
+    <h1>Language Lab</h1>
     <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
@@ -69,15 +69,6 @@
 
                 document.getElementById('searchResults').innerHTML = ''; // Temizleme
 
-                // Tureng
-                if (turengUrl) {
-                    document.getElementById('searchResults').innerHTML += `
-                        <div id="turengContainer" class="site-container">
-                            <iframe src="${turengUrl}"></iframe>
-                        </div>
-                    `;
-                }
-
                 // Cambridge ve Collins
                 if (cambridgeUrl && collinsUrl) {
                     document.getElementById('searchResults').innerHTML += `
@@ -88,6 +79,15 @@
                             <div class="site-container">
                                 <iframe src="${collinsUrl}" style="width: 700px; height: 700px;"></iframe>
                             </div>
+                        </div>
+                    `;
+                }
+                
+              // Tureng
+                if (turengUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div id="turengContainer" class="site-container">
+                            <iframe src="${turengUrl}"></iframe>
                         </div>
                     `;
                 }
