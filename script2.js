@@ -14,6 +14,7 @@ document.addEventListener('contextmenu', function(event) {
   if (selectedText !== '') {
     // Seçili metni KA veya KE kutucuklarına gönder
     // Burada hangi kutucuğa gönderileceğini belirtmek için "sendToKA" veya "sendToKE" id'lerini kullanabilirsiniz
-    chrome.runtime.sendMessage({action: 'sendText', text: selectedText, boxId: event.target.id});
+    var boxId = event.target.id;
+    sendSelectedTextToBox(selectedText, boxId);
   }
 });
