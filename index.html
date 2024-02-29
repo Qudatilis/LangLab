@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Language Lab</title>
+    <style>
+        .search-result {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .search-result h2 {
+            margin-top: 0;
+        }
+    </style>
 </head>
 <body>
     <h1>Language Lab</h1>
@@ -25,7 +35,11 @@
                         var parser = new DOMParser();
                         var htmlDoc = parser.parseFromString(data, 'text/html');
                         var definition = htmlDoc.querySelector('.def.ddef_d.db').innerText;
-                        document.getElementById('searchResults').innerHTML += `<h2>Cambridge Dictionary</h2><p>${definition}</p>`;
+                        document.getElementById('searchResults').innerHTML += `
+                            <div class="search-result">
+                                <h2>Cambridge Dictionary</h2>
+                                <p>${definition}</p>
+                            </div>`;
                     })
                     .catch(error => console.error('Error fetching from Cambridge:', error));
 
@@ -35,7 +49,11 @@
                         var parser = new DOMParser();
                         var htmlDoc = parser.parseFromString(data, 'text/html');
                         var definition = htmlDoc.querySelector('.cit.type-translation').innerText;
-                        document.getElementById('searchResults').innerHTML += `<h2>Collins Dictionary</h2><p>${definition}</p>`;
+                        document.getElementById('searchResults').innerHTML += `
+                            <div class="search-result">
+                                <h2>Collins Dictionary</h2>
+                                <p>${definition}</p>
+                            </div>`;
                     })
                     .catch(error => console.error('Error fetching from Collins:', error));
 
@@ -45,7 +63,11 @@
                         var parser = new DOMParser();
                         var htmlDoc = parser.parseFromString(data, 'text/html');
                         var translation = htmlDoc.querySelector('.tr.ts').innerText;
-                        document.getElementById('searchResults').innerHTML += `<h2>Tureng</h2><p>${translation}</p>`;
+                        document.getElementById('searchResults').innerHTML += `
+                            <div class="search-result">
+                                <h2>Tureng</h2>
+                                <p>${translation}</p>
+                            </div>`;
                     })
                     .catch(error => console.error('Error fetching from Tureng:', error));
             }
