@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <h1>Language Lab2</h1>
+    <h1>Language Lab</h1>
     <input type="text" id="searchInput" placeholder="Enter a word or phrase">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
@@ -66,4 +66,11 @@
                 document.getElementById('searchResults').innerHTML += `
                     <div class="site-container">
                         <h2>Tureng</h2>
-                
+                        <iframe id="turengFrame" src="${turengUrl}"></iframe>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
