@@ -9,29 +9,49 @@
             margin-bottom: 20px;
         }
         iframe {
-            width: 100%;
-            height: 500px;
             border: 1px solid #ccc;
         }
 
-        /* Masaüstü cihazlar için mobil görünüm */
-        @media only screen and (min-width: 701px) {
-            iframe {
+        /* Tureng için geniş görünüm */
+        #turengContainer {
+            margin-bottom: 20px;
+        }
+
+        #turengContainer iframe {
+            width: 800px;
+            height: 700px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Cambridge ve Collins için yan yana düzen */
+        #cambridgeCollinsContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        #cambridgeCollinsContainer .site-container {
+            width: calc(50% - 10px);
+        }
+
+        @media only screen and (max-width: 700px) {
+            #turengContainer iframe {
+                width: 100%;
                 height: 700px;
-                max-width: 700px;
-                margin: 0 auto;
-                display: block;
+            }
+
+            #cambridgeCollinsContainer .site-container {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Language Lab4</h1>
+    <h1>Language Lab6</h1>
     <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
-    <div id="psBox" contenteditable="true">PS Box</div>
-    <div id="exampleBox" contenteditable="true">Example Box</div>
 
     <script>
         function searchOnEnter(event) {
@@ -49,36 +69,47 @@
 
                 document.getElementById('searchResults').innerHTML = ''; // Temizleme
 
-                // Tureng
-                if (turengUrl) {
-                    document.getElementById('searchResults').innerHTML += `
-                        <div class="site-container">
-                            <iframe src="${turengUrl}" id="turengFrame"></iframe>
-                        </div>
-                    `;
-                }
-
                 // Cambridge ve Collins
                 if (cambridgeUrl && collinsUrl) {
                     document.getElementById('searchResults').innerHTML += `
-                        <div class="site-container">
-                            <iframe src="${cambridgeUrl}" id="cambridgeFrame"></iframe>
-                            <iframe src="${collinsUrl}" id="collinsFrame"></iframe>
+                        <div id="cambridgeCollinsContainer" class="site-container">
+                            <div class="site-container">
+                                <iframe src="${cambridgeUrl}" style="width: 700px; height: 700px;"></iframe>
+                            </div>
+                            <div class="site-container">
+                                <iframe src="${collinsUrl}" style="width: 700px; height: 700px;"></iframe>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+              // Tureng
+                if (turengUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div id="turengContainer" class="site-container">
+                            <iframe src="${turengUrl}"></iframe>
                         </div>
                     `;
                 }
             }
         }
-
-        // Kullanıcının seçtiği metni alıp kendi kutularımıza yapıştırmak için
-        document.addEventListener('mouseup', function(event) {
-            var selectedText = window.getSelection().toString().trim();
-
-            if (selectedText !== '') {
-                document.getElementById('psBox').innerText = selectedText;
-                document.getElementById('exampleBox').innerText = selectedText;
-            }
-        });
     </script>
 </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KA ve KE Kutucukları</title>
+    <!-- Buraya CSS dosyalarınızı ve diğer başlık etiketlerini ekleyebilirsiniz -->
+</head>
+<body>
+    <!-- KA kutucuğu -->
+    <textarea id="KA" rows="4" cols="50"></textarea>
+
+    <!-- KE kutucuğu -->
+    <textarea id="KE" rows="4" cols="50"></textarea>
+
+    <!-- Buraya JavaScript dosyalarınızı ve diğer içerik etiketlerini ekleyebilirsiniz -->
+</body>
+    
 </html>
