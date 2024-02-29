@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Language Lab1</title>
+    <title>Language Lab</title>
     <style>
-        .search-result {
+        .site-container {
             margin-bottom: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
         }
-        .search-result h2 {
-            margin-top: 0;
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -29,47 +29,28 @@
                 var collinsUrl = 'https://www.collinsdictionary.com/dictionary/english/' + encodeURIComponent(word);
                 var turengUrl = 'https://tureng.com/tr/turkce-ingilizce/' + encodeURIComponent(word);
 
-                fetch(cambridgeUrl)
-                    .then(response => response.text())
-                    .then(data => {
-                        var parser = new DOMParser();
-                        var htmlDoc = parser.parseFromString(data, 'text/html');
-                        var definition = htmlDoc.querySelector('.def.ddef_d.db').innerText;
-                        document.getElementById('searchResults').innerHTML += `
-                            <div class="search-result">
-                                <h2>Cambridge Dictionary</h2>
-                                <p>${definition}</p>
-                            </div>`;
-                    })
-                    .catch(error => console.error('Error fetching from Cambridge:', error));
+                document.getElementById('searchResults').innerHTML = ''; // Temizleme
 
-                fetch(collinsUrl)
-                    .then(response => response.text())
-                    .then(data => {
-                        var parser = new DOMParser();
-                        var htmlDoc = parser.parseFromString(data, 'text/html');
-                        var definition = htmlDoc.querySelector('.cit.type-translation').innerText;
-                        document.getElementById('searchResults').innerHTML += `
-                            <div class="search-result">
-                                <h2>Collins Dictionary</h2>
-                                <p>${definition}</p>
-                            </div>`;
-                    })
-                    .catch(error => console.error('Error fetching from Collins:', error));
+                document.getElementById('searchResults').innerHTML += `
+                    <div class="site-container">
+                        <h2>Cambridge Dictionary</h2>
+                        <iframe src="${cambridgeUrl}"></iframe>
+                    </div>
+                `;
 
-                fetch(turengUrl)
-                    .then(response => response.text())
-                    .then(data => {
-                        var parser = new DOMParser();
-                        var htmlDoc = parser.parseFromString(data, 'text/html');
-                        var translation = htmlDoc.querySelector('.tr.ts').innerText;
-                        document.getElementById('searchResults').innerHTML += `
-                            <div class="search-result">
-                                <h2>Tureng</h2>
-                                <p>${translation}</p>
-                            </div>`;
-                    })
-                    .catch(error => console.error('Error fetching from Tureng:', error));
+                document.getElementById('searchResults').innerHTML += `
+                    <div class="site-container">
+                        <h2>Collins Dictionary</h2>
+                        <iframe src="${collinsUrl}"></iframe>
+                    </div>
+                `;
+
+                document.getElementById('searchResults').innerHTML += `
+                    <div class="site-container">
+                        <h2>Tureng</h2>
+                        <iframe src="${turengUrl}"></iframe>
+                    </div>
+                `;
             }
         }
     </script>
