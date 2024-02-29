@@ -9,19 +9,7 @@
             margin-bottom: 20px;
         }
         iframe {
-            width: 100%;
-            height: 500px;
             border: 1px solid #ccc;
-        }
-
-        /* Masaüstü cihazlar için mobil görünüm */
-        @media only screen and (max-width: 700px) {
-            iframe {
-                height: 700px;
-                max-width: 100%;
-                margin: 0 auto 20px;
-                display: block;
-            }
         }
 
         /* Tureng için geniş görünüm */
@@ -30,10 +18,10 @@
         }
 
         #turengContainer iframe {
-            height: 800px;
-            max-width: 800px;
-            margin: 0 auto;
+            width: 800px;
+            height: 700px;
             display: block;
+            margin: 0 auto;
         }
 
         /* Cambridge ve Collins için yan yana düzen */
@@ -44,10 +32,15 @@
         }
 
         #cambridgeCollinsContainer .site-container {
-            width: 49%;
+            width: calc(50% - 10px);
         }
 
         @media only screen and (max-width: 700px) {
+            #turengContainer iframe {
+                width: 100%;
+                height: 700px;
+            }
+
             #cambridgeCollinsContainer .site-container {
                 width: 100%;
             }
@@ -55,7 +48,7 @@
     </style>
 </head>
 <body>
-    <h1>Language Lab2</h1>
+    <h1>Language Lab3</h1>
     <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
@@ -88,12 +81,12 @@
                 // Cambridge ve Collins
                 if (cambridgeUrl && collinsUrl) {
                     document.getElementById('searchResults').innerHTML += `
-                        <div id="cambridgeCollinsContainer">
+                        <div id="cambridgeCollinsContainer" class="site-container">
                             <div class="site-container">
-                                <iframe src="${cambridgeUrl}"></iframe>
+                                <iframe src="${cambridgeUrl}" style="width: 700px; height: 700px;"></iframe>
                             </div>
                             <div class="site-container">
-                                <iframe src="${collinsUrl}"></iframe>
+                                <iframe src="${collinsUrl}" style="width: 700px; height: 700px;"></iframe>
                             </div>
                         </div>
                     `;
