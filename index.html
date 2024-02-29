@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-    <h1>Language Lab2</h1>
+    <h1>Language Lab</h1>
     <input type="text" id="searchInput" placeholder="Enter a word or phrase" onkeypress="return searchOnEnter(event)">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
@@ -47,23 +47,29 @@
 
                 document.getElementById('searchResults').innerHTML = ''; // Temizleme
 
-                document.getElementById('searchResults').innerHTML += `
-                    <div class="site-container">
-                        <iframe src="${cambridgeUrl}"></iframe>
-                    </div>
-                `;
-
-                document.getElementById('searchResults').innerHTML += `
-                    <div class="site-container">
-                        <iframe src="${collinsUrl}"></iframe>
-                    </div>
-                `;
-
-                // Sadece Tureng için mobil görünüm kaldırıldı
+                // Tureng
                 if (turengUrl) {
                     document.getElementById('searchResults').innerHTML += `
                         <div class="site-container">
                             <iframe src="${turengUrl}" style="height: 800px;"></iframe>
+                        </div>
+                    `;
+                }
+
+                // Cambridge
+                if (cambridgeUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div class="site-container">
+                            <iframe src="${cambridgeUrl}"></iframe>
+                        </div>
+                    `;
+                }
+
+                // Collins
+                if (collinsUrl) {
+                    document.getElementById('searchResults').innerHTML += `
+                        <div class="site-container">
+                            <iframe src="${collinsUrl}"></iframe>
                         </div>
                     `;
                 }
