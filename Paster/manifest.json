@@ -3,7 +3,11 @@
   "name": "Paster",
   "version": "1.0",
   "description": "Web sayfalarından seçili cümleleri KA veya KE kutucuklarına gönderme eklentisi.",
-  "permissions": ["contextMenus", "activeTab"],
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "https://qudatilis.github.io/langlab/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
