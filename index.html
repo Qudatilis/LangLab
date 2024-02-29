@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #808080; /* Sitenin arka plan rengi */
+            background-color: #171717; /* Sitenin arka plan rengi */
         }
 
         #content {
@@ -72,7 +72,7 @@
             }
         }
         .box {
-            width: 200px;
+            width: 500px;
             height: 200px;
             border-radius: 20px;
             border: 2px solid black;
@@ -80,6 +80,8 @@
             padding: 10px;
             float: left;
             cursor: pointer; /* Mouse imlecini el işareti yap */
+            color: white;
+            font-family: Arial, sans-serif;
         }
 
         /* Buton renkleri */
@@ -109,6 +111,12 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        h1 {
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
     </style>
 </head>
 <body>
@@ -203,6 +211,13 @@
                 alert('Metin kopyalanamadı.');
             });
         }
+
+    // Sayfa yüklenmesiyle birlikte arama kutusuna odaklan
+    window.onload = function() {
+        setTimeout(function() {
+            document.getElementById("searchInput").focus(); // Arama kutusuna odaklan
+        }, 100); // Gecikme ekleyerek odaklanma işlemini sağlar
+    };
     </script>
 
 <div class="box" id="P.S."></div>
