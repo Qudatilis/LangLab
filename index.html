@@ -23,10 +23,17 @@
                 display: block;
             }
         }
+
+        /* Sadece Tureng için mobil görünüm kaldırma */
+        @media only screen and (max-width: 600px) {
+            #turengFrame {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Language Lab</h1>
+    <h1>Language Lab2</h1>
     <input type="text" id="searchInput" placeholder="Enter a word or phrase">
     <button onclick="search()">Search</button>
     <div id="searchResults"></div>
@@ -37,6 +44,7 @@
             if (phrase !== '') {
                 var cambridgeUrl = 'https://dictionary.cambridge.org/dictionary/english/' + encodeURIComponent(phrase.replace(/\s/g, '-'));
                 var collinsUrl = 'https://www.collinsdictionary.com/dictionary/english/' + encodeURIComponent(phrase.replace(/\s/g, '-'));
+
                 var turengUrl = 'https://tureng.com/tr/turkce-ingilizce/' + encodeURIComponent(phrase.replace(/\s/g, '%20'));
 
                 document.getElementById('searchResults').innerHTML = ''; // Temizleme
@@ -58,11 +66,4 @@
                 document.getElementById('searchResults').innerHTML += `
                     <div class="site-container">
                         <h2>Tureng</h2>
-                        <iframe src="${turengUrl}"></iframe>
-                    </div>
-                `;
-            }
-        }
-    </script>
-</body>
-</html>
+                
